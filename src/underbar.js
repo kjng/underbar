@@ -103,6 +103,23 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var acc = [];
+
+    _.each(array, function(element) {
+      var isInAcc = false;
+
+      _.each(acc, function(item) {
+        if (element === item) {
+          isInAcc = true;
+        }
+      });
+
+      if (!isInAcc) {
+        acc.push(element);
+      }
+    });
+
+    return acc;
   };
 
 
