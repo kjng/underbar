@@ -321,9 +321,11 @@
     
     return function() {
       var args = JSON.stringify(arguments);
+
       if (results[args] === undefined) {
         results[args] = func.apply(this, arguments);
       }
+      
       return results[args];     
     }
   };
@@ -335,6 +337,13 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = [];
+
+    for (var i = 2; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    setTimeout(function() {return func.apply(this, args)}, wait);
   };
 
 
