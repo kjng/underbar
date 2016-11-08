@@ -325,7 +325,7 @@
       if (results[args] === undefined) {
         results[args] = func.apply(this, arguments);
       }
-      
+
       return results[args];     
     }
   };
@@ -358,6 +358,16 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var copyArray = array.slice();
+
+    for (var i = copyArray.length-1; i >= 1; i--) {
+      var randomNum = Math.ceil(Math.random() * i);
+      var temp = copyArray[i];
+      copyArray[i] = copyArray[randomNum];
+      copyArray[randomNum] = temp;
+    }
+
+    return copyArray;
   };
 
 
